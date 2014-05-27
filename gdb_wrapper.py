@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import time
 import os
 
@@ -30,7 +30,7 @@ def to_xml():
       result += bt.to_xml()
    result += "  </backtraces>\n"
    result += "</doombot>\n"
-   print result
+   print(result)
    f = open('/tmp/dommbot','w')
    f.write(result)
    f.close()
@@ -58,7 +58,7 @@ def get_backtrace(bt_type):
    output = gdb.execute("bt",False,True)
    bt_hash = get_backtrace_identity(output)
    if not bt_hash in backtrace_collecton:
-      print "\n\n\nADDING "+bt_type+ " "+ bt_hash+" to list"
+      print("\n\n\nADDING "+bt_type+ " "+ bt_hash+" to list")
       info = Bt_info()
       info.content = output
       info.bt_hash = bt_hash
@@ -66,7 +66,7 @@ def get_backtrace(bt_type):
       backtrace_collecton[bt_hash] = info
    else:
       backtrace_collecton[bt_hash].count += 1
-      print "\n\n\nEXISTING " +bt_type+ " ("+  str(backtrace_collecton[bt_hash].count)+")"
+      print("\n\n\nEXISTING " +bt_type+ " ("+  str(backtrace_collecton[bt_hash].count)+")")
    run()
 
 def stop_handler (event):
@@ -76,16 +76,16 @@ def stop_handler (event):
          total_sig +=1
          get_backtrace(event.stop_signal)
       if event.stop_signal == "SIGABRT":
-         print "SIGABRT"
+         print("SIGABRT")
          total_sig +=1
          get_backtrace(event.stop_signal)
    elif isinstance(event,gdb.BreakpointEvent):
-      print "BREAKPOINT "+ str(event.breakpoint.expression) +" " \
+      print("BREAKPOINT "+ str(event.breakpoint.expression) +" " \
          +str(event.breakpoint.location)+" "\
          +str(event.breakpoint.condition) + " " \
-         +str(event.breakpoint.commands)
+         +str(event.breakpoint.commands))
       for k,v in event.breakpoints:
-         print "HERE "+str(k)+" "+str(v)
+         print("HERE "+str(k)+" "+str(v))
 
 #Force restart
 def exit_handler(event):
