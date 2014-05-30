@@ -2,6 +2,18 @@
 import time
 import os
 
+# This file is used to wrap the GDB instances
+#
+#  Doombot master server
+#      |-----> process_watcher threads
+#          |----> GDB process
+#              |----->Doombot wrapper       <=== You are here
+#                   -----> Real process
+#
+# This may seem a little overkill, but using the same
+# process for both GDB and the Web server had too many
+# limitations.
+
 backtrace_collecton = {}
 total_sig = 0
 max_run = 10
@@ -98,5 +110,5 @@ gdb.events.exited.connect (exit_handler)
 gdb.execute("set confirm off")
 gdb.execute("set height 0")
 os.system('export MALLOC_CHECK=2')
-gdb.execute("file /home/etudiant/prefix/lib/sflphone/sflphoned")
+#gdb.execute("file /home/etudiant/prefix/lib/sflphone/sflphoned")
 run()

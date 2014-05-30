@@ -37,6 +37,18 @@ Make a script that send packets to a port
 
 Add an "load file and exit command line args"
 
+## Web service API
+
+The API is quite simple for now
+
+```sh
+    # GDB session
+    curl http://127.0.0.1:5000/run/
+    
+    # Kill the current GDB session
+    curl http://127.0.0.1:5000/kill/
+```
+
 ## Roadmap
 
 * The application is still tightly integrated with sflphone, a better separation is needed.

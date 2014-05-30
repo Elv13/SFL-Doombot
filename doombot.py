@@ -133,6 +133,7 @@ for i in range(len(sub_range)):
 	config.command += " " + sub_range[i]
 
 config.command = config.command.strip()
+config.args = sub_range
 
 doombot_path = os.path.dirname(os.path.realpath(__file__)) + "/"
 
@@ -155,13 +156,6 @@ print("Using a script directory : " + str( config.directory != ""))
 print("Using a script           : " + str( config.script != ""   ))
 print()
 
-bashCommand = "cwm --rdf test.rdf --ntriples > test.nt"
-process = subprocess.Popen(sub_range, stdout=subprocess.PIPE)
-output = process.communicate()[0]
-#error = process.communicate()[2]
-
-def blabla():
-	return "foo"
 # Start the server
 import server
 server.app.run()
